@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   },
 
   verificationToken: String,
-  addresess: [
+  addresses: [
     {
       name: String,
       mobileNo: String,

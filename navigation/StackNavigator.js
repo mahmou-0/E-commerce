@@ -10,6 +10,9 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import ProductinfoScreen from "../screens/ProductinfoScreen";
+import AddAddressScreen from "../screens/AddAddressScreen";
+import AddressScreen from "../screens/AddressScreen";
+// import { Provider } from "react-redux";
 // import ProductInfoScreen from "../screens/ProductInfoScreen";
 // import AddAddressScreen from "../screens/AddAddressScreen";
 // import AddressScreen from "../screens/AddressScreen";
@@ -98,6 +101,16 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Info"
           component={ProductinfoScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Address"
+          component={AddAddressScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Add"
+          component={AddressScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
