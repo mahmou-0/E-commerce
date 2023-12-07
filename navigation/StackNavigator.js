@@ -12,7 +12,9 @@ import { Ionicons } from "@expo/vector-icons";
 import ProductinfoScreen from "../screens/ProductinfoScreen";
 import AddAddressScreen from "../screens/AddAddressScreen";
 import AddressScreen from "../screens/AddressScreen";
-// import { Provider } from "react-redux";
+import CartScreen from "../screens/CartScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import { Provider } from "react-redux";
 // import ProductInfoScreen from "../screens/ProductInfoScreen";
 // import AddAddressScreen from "../screens/AddAddressScreen";
 // import AddressScreen from "../screens/AddressScreen";
@@ -46,7 +48,7 @@ const StackNavigator = () => {
 
         <Tab.Screen
           name="Profile"
-          component={HomeScreen}
+          component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
             tabBarLabelStyle: { color: "#008E97" },
@@ -62,7 +64,7 @@ const StackNavigator = () => {
 
         <Tab.Screen
           name="Cart"
-          component={HomeScreen}
+          component={CartScreen}
           options={{
             tabBarLabel: "Cart",
             tabBarLabelStyle: { color: "#008E97" },

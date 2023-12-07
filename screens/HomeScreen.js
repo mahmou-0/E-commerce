@@ -9,7 +9,7 @@ import {
   TextInput,
   Image,
 } from "react-native";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -22,7 +22,11 @@ import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 // import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
+import { UserType } from "../UserContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
+import { decode as atob } from "base-64";
 
 const HomeScreen = () => {
   const list = [
@@ -195,14 +199,16 @@ const HomeScreen = () => {
       size: "8GB RAM, 128GB Storage",
     },
   ];
+  global.atob = atob;
 
   const [products, setProducts] = useState([]);
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
   const [category, setCategory] = useState("jewelery");
-  //   const { userId, setUserId } = useContext(UserType);
+  const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
+  console.log(selectedAddress);
   const [items, setItems] = useState([
     { label: "Men's clothing", value: "men's clothing" },
     { label: "jewelery", value: "jewelery" },
@@ -226,9 +232,40 @@ const HomeScreen = () => {
     setCompanyOpen(false);
   }, []);
 
-  //   const cart = useSelector((state) => state.cart.cart);
-  //   console.log(cart);
+  // const cart = useSelector((state) => state.cart.cart);
+  // console.log(cart);
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    if (userId) {
+      fetchAddresses();
+    }
+  }, [userId, modalVisible]);
+
+  const fetchAddresses = async () => {
+    try {
+      const response = await axios.get(
+        `https://7eda-82-222-61-36.ngrok-free.app/addresses/${userId}`
+      );
+      const { addresses } = response.data;
+
+      setAddresses(addresses);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = await AsyncStorage.getItem("authToken");
+      const decodedToken = jwtDecode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+    };
+
+    fetchUser();
+  }, []);
+  // console.log("address...", addresses);
 
   return (
     <>
@@ -239,6 +276,7 @@ const HomeScreen = () => {
           backgroundColor: "white",
         }}
       >
+        {/* the head desgin */}
         <ScrollView>
           <View
             style={{
@@ -284,9 +322,15 @@ const HomeScreen = () => {
           >
             <EvilIcons name="location" size={24} color="black" />
             <Pressable>
-              <Text style={{ fontSize: 13, fontWeight: "500" }}>
-                Deliver to Mahmoud - Sakarya 538514
-              </Text>
+              {selectedAddress ? (
+                <Text>
+                  Deliver to {selectedAddress?.name} - {selectedAddress?.street}
+                </Text>
+              ) : (
+                <Text style={{ fontSize: 13, fontWeight: "500" }}>
+                  Add a Address
+                </Text>
+              )}
             </Pressable>
             <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
           </Pressable>
@@ -500,12 +544,61 @@ const HomeScreen = () => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {/* already added addresses */}
+            {addresses?.map((item, index) => (
+              <Pressable
+                key={index}
+                onPress={() => setSelectedAdress(item)}
+                style={{
+                  width: 140,
+                  height: 140,
+                  borderColor: "#D0D0D0",
+                  borderWidth: 1,
+                  padding: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 3,
+                  marginRight: 15,
+                  marginTop: 10,
+                  backgroundColor:
+                    selectedAddress === item ? "#FBCEB1" : "white",
+                }}
+              >
+                <View
+                  style={{ flexDirection: "row", alignItems: "center", gap: 3 }}
+                >
+                  <Text style={{ fontSize: 13, fontWeight: "bold" }}>
+                    {item?.name}
+                  </Text>
+                  <Entypo name="location-pin" size={24} color="red" />
+                </View>
+
+                <Text
+                  numberOfLines={1}
+                  style={{ width: 130, fontSize: 13, textAlign: "center" }}
+                >
+                  {item?.houseNo},{item?.landmark}
+                </Text>
+
+                <Text
+                  numberOfLines={1}
+                  style={{ width: 130, fontSize: 13, textAlign: "center" }}
+                >
+                  {item?.street}
+                </Text>
+                <Text
+                  numberOfLines={1}
+                  style={{ width: 130, fontSize: 13, textAlign: "center" }}
+                >
+                  Turkey, Sakarya
+                </Text>
+              </Pressable>
+            ))}
 
             <Pressable
-             onPress={() => {
+              onPress={() => {
                 setModalVisible(false);
-                navigation.navigate('Address')
-             }}
+                navigation.navigate("Address");
+              }}
               style={{
                 width: 140,
                 height: 140,
@@ -532,7 +625,9 @@ const HomeScreen = () => {
           </ScrollView>
 
           <View style={{ flexDirection: "column", gap: 7, marginBottom: 30 }}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
+            >
               <Entypo name="location-pin" size={22} color="#0066b2" />
 
               <Text style={{ color: "#0066b2", fontWeight: "400" }}>
