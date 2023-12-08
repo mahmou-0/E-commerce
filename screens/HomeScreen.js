@@ -21,7 +21,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { UserType } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -232,8 +232,8 @@ const HomeScreen = () => {
     setCompanyOpen(false);
   }, []);
 
-  // const cart = useSelector((state) => state.cart.cart);
-  // console.log(cart);
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(cart);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -383,6 +383,18 @@ const HomeScreen = () => {
           >
             {deals.map((item, index) => (
               <Pressable
+                onPress={() =>
+                  navigation.navigate("Info", {
+                    id: item.id,
+                    title: item.title,
+                    price: item?.price,
+                    carouselImages: item.carouselImages,
+                    color: item?.color,
+                    size: item?.size,
+                    oldPrice: item?.oldPrice,
+                    item: item,
+                  })
+                }
                 key={index}
                 style={{
                   marginVertical: 10,

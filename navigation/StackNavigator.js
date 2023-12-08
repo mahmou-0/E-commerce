@@ -15,6 +15,7 @@ import AddressScreen from "../screens/AddressScreen";
 import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { Provider } from "react-redux";
+import ConfirmationScreen from "../screens/ConfirmationScreen";
 // import ProductInfoScreen from "../screens/ProductInfoScreen";
 // import AddAddressScreen from "../screens/AddAddressScreen";
 // import AddressScreen from "../screens/AddressScreen";
@@ -113,6 +114,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Add"
           component={AddressScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Confirm"
+          component={ConfirmationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
