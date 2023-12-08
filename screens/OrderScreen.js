@@ -8,12 +8,12 @@ const OrderScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace("Main");
-    }, 1300);
+    }, 3000);
   }, []);
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
       <LottieView
-        source={require("../assets/thumbs")}
+        source={require("../assets/thumbs.json")}
         // ref={animation}
         style={{
           height: 260,
