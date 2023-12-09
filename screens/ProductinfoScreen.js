@@ -7,6 +7,7 @@ import {
   TextInput,
   ImageBackground,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import { AntDesign, Feather } from "@expo/vector-icons";
@@ -15,15 +16,26 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/CartReduccer";
+import { addFavorite, removeFavorite } from "../redux/FavoriteReducer";
 
 const ProductinfoScreen = () => {
-  
   const route = useRoute();
   const { width } = Dimensions.get("window");
   const [addedToCart, setAddedToCart] = useState(false);
   const navigation = useNavigation();
   const height = (width * 100) / 100;
   const dispatch = useDispatch();
+
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const handleFavoritePress = (item) => {
+    const isFavorite = favorites.some((favItem) => favItem.id === item.id);
+    if (isFavorite) {
+      dispatch(removeFavorite(item.id));
+    } else {
+      dispatch(addFavorite(item));
+    }
+  };
+
   const addItemToCart = (item) => {
     setAddedToCart(true);
     dispatch(addToCart(item));
@@ -128,7 +140,21 @@ const ProductinfoScreen = () => {
                   size={24}
                   color="black"
                 /> */}
-                <AntDesign name="hearto" size={24} color="#00CED1" />
+                <TouchableOpacity
+                  onPress={() => handleFavoritePress(route.params.item)}
+                >
+                  <AntDesign
+                    name={
+                      favorites.some(
+                        (favItem) => favItem.id === route.params.item.id
+                      )
+                        ? "heart"
+                        : "hearto"
+                    }
+                    size={24}
+                    color="#00CED1"
+                  />
+                </TouchableOpacity>
               </View>
             </View>
             <View

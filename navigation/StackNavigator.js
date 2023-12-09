@@ -17,6 +17,8 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import OrderScreen from "../screens/OrderScreen";
+import FavoriteScreen from "../screens/FavoriteScreen";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -31,28 +33,12 @@ const StackNavigator = () => {
           options={{
             tabBarLabel: "Home",
             tabBarLabelStyle: { color: "#008E97" },
-            // headerShown: false,
+            headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
                 <Ionicons name="home" size={24} color="#00CED1" />
               ) : (
                 <Ionicons name="home" size={24} color="black" />
-              ),
-          }}
-        />
-
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            tabBarLabel: "Profile",
-            tabBarLabelStyle: { color: "#008E97" },
-
-            tabBarIcon: ({ focused }) =>
-              focused ? (
-                <Ionicons name="person" size={24} color="#00CED1" />
-              ) : (
-                <Ionicons name="person-outline" size={24} color="black" />
               ),
           }}
         />
@@ -69,6 +55,38 @@ const StackNavigator = () => {
                 <AntDesign name="shoppingcart" size={24} color="#00CED1" />
               ) : (
                 <AntDesign name="shoppingcart" size={24} color="black" />
+              ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Favorite"
+          component={FavoriteScreen}
+          options={{
+            tabBarLabel: "Favorite",
+            tabBarLabelStyle: { color: "#008E97" },
+            headerShown: false,
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <MaterialIcons name="favorite" size={24} color="#00CED1" />
+              ) : (
+                <MaterialIcons name="favorite-border" size={24} color="black" />
+              ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: "Profile",
+            tabBarLabelStyle: { color: "#008E97" },
+
+            tabBarIcon: ({ focused }) =>
+              focused ? (
+                <Ionicons name="person" size={24} color="#00CED1" />
+              ) : (
+                <Ionicons name="person-outline" size={24} color="black" />
               ),
           }}
         />
@@ -119,6 +137,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Order"
           component={OrderScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Favortie"
+          component={FavoriteScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
