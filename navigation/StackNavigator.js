@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native"; // Correct import for NavigationContainer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LonginScreen"; // Corrected typo in LoginScreen import
@@ -14,16 +14,9 @@ import AddAddressScreen from "../screens/AddAddressScreen";
 import AddressScreen from "../screens/AddressScreen";
 import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import { Provider } from "react-redux";
+
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import OrderScreen from "../screens/OrderScreen";
-// import ProductInfoScreen from "../screens/ProductInfoScreen";
-// import AddAddressScreen from "../screens/AddAddressScreen";
-// import AddressScreen from "../screens/AddressScreen";
-// import CartScreen from "../screens/CartScreen";
-// import ProfileScreen from "../screens/ProfileScreen";
-// import ConfirmationScreen from "../screens/ConfirmationScreen";
-// import OrderScreen from "../screens/OrderScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -38,7 +31,7 @@ const StackNavigator = () => {
           options={{
             tabBarLabel: "Home",
             tabBarLabelStyle: { color: "#008E97" },
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
                 <Ionicons name="home" size={24} color="#00CED1" />
@@ -54,7 +47,7 @@ const StackNavigator = () => {
           options={{
             tabBarLabel: "Profile",
             tabBarLabelStyle: { color: "#008E97" },
-            headerShown: false,
+
             tabBarIcon: ({ focused }) =>
               focused ? (
                 <Ionicons name="person" size={24} color="#00CED1" />
@@ -85,6 +78,7 @@ const StackNavigator = () => {
 
   return (
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
       <Stack.Navigator>
         {/* Corrected the screen name from "Longin" to "Login" */}
         <Stack.Screen

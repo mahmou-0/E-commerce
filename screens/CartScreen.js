@@ -39,6 +39,7 @@ const CartScreen = () => {
   const navigation = useNavigation();
   return (
     <ScrollView style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}>
+        
       <View
         style={{
           backgroundColor: "#00CED1",
@@ -47,6 +48,7 @@ const CartScreen = () => {
           alignItems: "center",
         }}
       >
+        
         <Pressable
           style={{
             flexDirection: "row",

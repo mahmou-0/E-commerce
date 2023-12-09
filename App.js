@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+// import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 import StackNavigator from "./navigation/StackNavigator";
 import { ModalPortal } from "react-native-modals";
 import { UserContext } from "./UserContext";
@@ -11,7 +11,9 @@ export default function App() {
     <>
       <Provider store={store}>
         <UserContext>
-          <StackNavigator />
+          <StackNavigator>
+            <StatusBar barStyle="dark-content" backgroundColor="#ecf0f1" />
+          </StackNavigator>
           <ModalPortal />
         </UserContext>
       </Provider>
