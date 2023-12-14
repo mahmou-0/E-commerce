@@ -35,6 +35,7 @@ const ProductinfoScreen = () => {
       dispatch(addFavorite(item));
     }
   };
+  console.log("Favorites:....", favorites);
 
   const addItemToCart = (item) => {
     setAddedToCart(true);
