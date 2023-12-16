@@ -63,7 +63,7 @@ const ConfirmationScreen = () => {
       };
 
       const response = await axios.post(
-        "https://7eda-82-222-61-36.ngrok-free.app/orders",
+        "https://96c7-82-222-61-37.ngrok-free.app/orders",
         orderData
       );
       if (response.status === 200) {

@@ -39,7 +39,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     service: "gmail",
     auth: {
       user: "mahmoud.ha.199@gmail.com",
-      pass: "mahmoud.ha.199",
+      pass: "txouculbekkelgot",
     },
   });
 
@@ -48,7 +48,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     from: "amazon.com",
     to: email,
     subject: "Email Verification",
-    text: `Please click the following link to verify your email:  https://8a1c-82-222-61-35.ngrok-free.app/verify/${verificationToken}`,
+    text: `Please click the following link to verify your email:  https://96c7-82-222-61-37.ngrok-free.app/verify/${verificationToken}`,
   };
 
   // Send the email
@@ -154,6 +154,24 @@ app.post("/login", async (req, res) => {
     res.status(500).send({ message: "Login Failed" });
   }
 });
+
+app.post("/admin/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user || !user.isAdmin) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  // Verify password, consider using bcrypt
+  if (user.password !== password) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // Generate and send token, consider using JWT
+  // ...
+});
+
 
 //endpoint to store a new address to the backend
 app.post("/addresses", async (req, res) => {

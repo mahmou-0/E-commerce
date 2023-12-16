@@ -57,7 +57,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `https://7eda-82-222-61-36.ngrok-free.app/profile/${userId}`
+          `https://96c7-82-222-61-37.ngrok-free.app /profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -80,7 +80,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://7eda-82-222-61-36.ngrok-free.app/orders/${userId}`
+          `https://96c7-82-222-61-37.ngrok-free.app /orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);

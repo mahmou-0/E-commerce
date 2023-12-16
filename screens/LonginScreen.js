@@ -20,20 +20,20 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
-  // useEffect(() => {
-  //   const checkLoginStatus = async () => {
-  //     try {
-  //       const token = await AsyncStorage.getItem("authToken");
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
 
-  //       if (token) {
-  //         navigation.replace("Main");
-  //       }
-  //     } catch (error) {
-  //       console.log("eroor message", error);
-  //     }
-  //   };
-  //   checkLoginStatus();
-  // }, []);
+        if (token) {
+          navigation.replace("Main");
+        }
+      } catch (error) {
+        console.log("eroor message", error);
+      }
+    };
+    checkLoginStatus();
+  }, []);
 
   const handleLogin = () => {
     const user = {
@@ -42,7 +42,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post("https://7eda-82-222-61-36.ngrok-free.app/login", user)
+      .post("https://96c7-82-222-61-37.ngrok-free.app/login", user)
       .then((response) => {
         console.log(response);
         const token = response.data.token;

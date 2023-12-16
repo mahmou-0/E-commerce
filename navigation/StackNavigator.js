@@ -19,6 +19,7 @@ import ConfirmationScreen from "../screens/ConfirmationScreen";
 import OrderScreen from "../screens/OrderScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import { MaterialIcons } from "@expo/vector-icons";
+import AdminLoginScreen from "../screens/AdminLoginScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -142,6 +143,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Favortie"
           component={FavoriteScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Admin"
+          component={AdminLoginScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
