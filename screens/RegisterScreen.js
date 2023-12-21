@@ -15,6 +15,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import MyImage from "../assets/mah-01.png";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -60,11 +61,12 @@ const RegisterScreen = () => {
     >
       <View>
         <Image
-          style={{ width: 150, height: 100 }}
-          source={{
-            uri:
-              "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
-          }}
+          style={{ width: 150, height: 100,  marginTop:18  }}
+          // source={{
+          //   uri:
+          //     "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",
+          // }}
+          source={MyImage}
         />
       </View>
 

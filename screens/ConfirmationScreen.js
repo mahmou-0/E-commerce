@@ -37,7 +37,7 @@ const ConfirmationScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://7eda-82-222-61-36.ngrok-free.app/addresses/${userId}`
+        `https://96c7-82-222-61-37.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -91,7 +91,7 @@ const ConfirmationScreen = () => {
         >
           {steps?.map((step, index) => (
             <View
-              //   key={index}
+                key={index}
               style={{ justifyContent: "center", alignItems: "center" }}
             >
               {index > 0 && (

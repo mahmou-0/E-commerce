@@ -1,24 +1,18 @@
-// import { StyleSheet, Text, View } from "react-native";
-// import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-// const AdminLoginScreen = () => {
+const AdminLoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const navigation = useNavigation();
 
-//     const AdminLoginScreen = () => {
-//         const [email, setEmail] = useState("");
-//         const [password, setPassword] = useState("");
-//         // const navigation = useNavigation();
+  return (
+    <View>
+      <Text>AdminLoginScreen</Text>
+    </View>
+  );
+};
 
-//   return (
-//     <View>
-//       <Text>AdminLoginScreen</Text>
-//     </View>
-//   );
-// };
+export default AdminLoginScreen;
 
-// export default AdminLoginScreen;
-
-// const styles = StyleSheet.create({});
-
-// export default AdminLoginScreen;
-
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({});

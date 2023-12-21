@@ -22,7 +22,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-
+  // oldPassword: {
+  //   type: String,
+  //   required: true,
+  // },
+  // newPassword: {
+  //   type: String,
+  //   required: true,
+  // },
   verificationToken: String,
   addresses: [
     {

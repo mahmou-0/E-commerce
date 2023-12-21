@@ -268,6 +268,12 @@ const HomeScreen = () => {
   }, []);
   // console.log("address...", addresses);
 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <SafeAreaView
@@ -305,11 +311,22 @@ const HomeScreen = () => {
                 size={24}
                 color="black"
               />
-              <TextInput placeholder="Sreach Amazon.in" />
+              <TextInput
+                placeholder="Sreach Amazon.in"
+                value={searchQuery}
+                onChangeText={(text) => setSearchQuery(text)}
+              />
             </Pressable>
 
             <Feather name="mic" size={24} color="black" />
           </View>
+
+          {searchQuery ? (
+            // Render only filtered products when there is a search query
+            filteredProducts.map((item, index) => (
+              <ProductItem item={item} key={index} />
+            ))
+          ) : (<View></View>)}
 
           <Pressable
             onPress={() => setModalVisible(!modalVisible)}
@@ -362,6 +379,7 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </ScrollView>
+
           <SliderBox
             images={images}
             autoPlay
@@ -527,7 +545,11 @@ const HomeScreen = () => {
               ))}
           </View>
         </ScrollView>
+       
       </SafeAreaView>
+      
+      
+      
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}
         swipeDirection={["up", "down"]}

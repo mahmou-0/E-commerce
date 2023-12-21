@@ -13,6 +13,7 @@ import { Ionicons, AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 import { UserType } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MyImage from "../assets/mah-01.png";
 
 const ProfileScreen = () => {
   const { userId, setUserId } = useContext(UserType);
@@ -29,10 +30,11 @@ const ProfileScreen = () => {
       headerLeft: () => (
         <Image
           style={{ width: 140, height: 120, resizeMode: "contain" }}
-          source={{
-            uri:
-              "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
-          }}
+          // source={{
+          //   uri:
+          //     "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
+          // }}
+          source={MyImage}
         />
       ),
       headerRight: () => (
@@ -57,7 +59,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `https://96c7-82-222-61-37.ngrok-free.app /profile/${userId}`
+          `https://96c7-82-222-61-37.ngrok-free.app/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -80,7 +82,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://96c7-82-222-61-37.ngrok-free.app /orders/${userId}`
+          `https://96c7-82-222-61-37.ngrok-free.app/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);
@@ -121,6 +123,7 @@ const ProfileScreen = () => {
         </Pressable>
 
         <Pressable
+          onPress={() => navigation.navigate("Account", { user })}
           style={{
             padding: 10,
             backgroundColor: "#E0E0E0",
@@ -141,6 +144,7 @@ const ProfileScreen = () => {
         }}
       >
         <Pressable
+          onPress={() => navigation.navigate("Home")}
           style={{
             padding: 10,
             backgroundColor: "#E0E0E0",
