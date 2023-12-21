@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const port = 8000;
@@ -45,7 +46,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
 
   // Compose the email message
   const mailOptions = {
-    from: "amazon.com",
+    from: "tuquoise.com",
     to: email,
     subject: "Email Verification",
     text: `Please click the following link to verify your email:  https://96c7-82-222-61-37.ngrok-free.app/verify/${verificationToken}`,
@@ -172,7 +173,6 @@ app.post("/admin/login", async (req, res) => {
   // ...
 });
 
-
 //endpoint to store a new address to the backend
 app.post("/addresses", async (req, res) => {
   try {
@@ -287,3 +287,65 @@ app.get("/orders/:userId", async (req, res) => {
     res.status(500).json({ message: "Error" });
   }
 });
+
+// Endpoint to update user password
+// app.post("/update-password", async (req, res) => {
+//   try {
+//     const { userId, oldPassword, newPassword } = req.body;
+
+//     console.log("UserID:", userId); // Log user ID
+//     console.log("Old Password:", oldPassword); // Log old password from request
+//     console.log("new Password:", newPassword); // Log old password from request
+
+//     if (!oldPassword || !newPassword) {
+//       return res.status(400).send({ message: "Missing password fields" });
+//     }
+
+//     const user = await User.findById(userId);
+
+//     if (!user) {
+//       return res.status(404).send({ message: "User not found" });
+//     }
+//     console.log("user password", user.password); // Log old password from request
+//     const isMatch = await bcrypt.compare(oldPassword, user.password);
+//     console.log("is Match", isMatch);
+//     console.log(oldPassword,user.password);
+
+//     if (!isMatch) {
+//       return res.status(401).send({ message: "Invalid old password" });
+//     }
+
+//     await user.save();
+
+//     res.send({ message: "Password updated successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send({ message: "Error updating password", error: error });
+//   }
+// });
+
+app.post("/update-password", async (req, res) => {
+  try {
+    const { userId, oldPassword, newPassword } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    // Directly compare the old password with the stored password
+    if (oldPassword !== user.password) {
+      return res.status(401).send({ message: "Invalid old password" });
+    }
+
+    // Update the password (Consider hashing the new password here)
+    user.password = newPassword;
+    await user.save();
+
+    res.send({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Error updating password" });
+  }
+});
+
