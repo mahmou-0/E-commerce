@@ -246,7 +246,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://96c7-82-222-61-37.ngrok-free.app/addresses/${userId}`
+        `https://9cb5-195-142-243-198.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -326,7 +326,9 @@ const HomeScreen = () => {
             filteredProducts.map((item, index) => (
               <ProductItem item={item} key={index} />
             ))
-          ) : (<View></View>)}
+          ) : (
+            <View></View>
+          )}
 
           <Pressable
             onPress={() => setModalVisible(!modalVisible)}
@@ -545,11 +547,8 @@ const HomeScreen = () => {
               ))}
           </View>
         </ScrollView>
-       
       </SafeAreaView>
-      
-      
-      
+
       <BottomModal
         onBackdropPress={() => setModalVisible(!modalVisible)}
         swipeDirection={["up", "down"]}

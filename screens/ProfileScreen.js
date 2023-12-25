@@ -54,12 +54,13 @@ const ProfileScreen = () => {
     });
   }, []);
   const [user, setUser] = useState();
+  console.log('the user in the profile Screen',user);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `https://96c7-82-222-61-37.ngrok-free.app/profile/${userId}`
+          `https://9cb5-195-142-243-198.ngrok-free.app/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);
@@ -82,7 +83,7 @@ const ProfileScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://96c7-82-222-61-37.ngrok-free.app/orders/${userId}`
+          `https://9cb5-195-142-243-198.ngrok-free.app/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);

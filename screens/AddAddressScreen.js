@@ -27,7 +27,7 @@ const AddAddressScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://96c7-82-222-61-37.ngrok-free.app/addresses/${userId}`
+        `https://9cb5-195-142-243-198.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 

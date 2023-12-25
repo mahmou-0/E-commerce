@@ -32,6 +32,7 @@ mongoose
 
 const User = require("./models/user");
 const Order = require("./models/order");
+const Product = require("./models/Product");
 
 const sendVerificationEmail = async (email, verificationToken) => {
   // Create a Nodemailer transporter
@@ -49,7 +50,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     from: "tuquoise.com",
     to: email,
     subject: "Email Verification",
-    text: `Please click the following link to verify your email:  https://96c7-82-222-61-37.ngrok-free.app/verify/${verificationToken}`,
+    text: `Please click the following link to verify your email: https://9cb5-195-142-243-198.ngrok-free.app/verify/${verificationToken}`,
   };
 
   // Send the email
@@ -148,9 +149,12 @@ app.post("/login", async (req, res) => {
     }
 
     // generate token
-    const token = jwt.sign({ userId: user._id }, secretKey);
+    const token = jwt.sign(
+      { userId: user._id, isAdmin: user.isAdmin },
+      secretKey
+    );
 
-    res.status(200).send({ token });
+    res.status(200).send({ token, isAdmin: user.isAdmin });
   } catch (error) {
     res.status(500).send({ message: "Login Failed" });
   }
@@ -349,3 +353,75 @@ app.post("/update-password", async (req, res) => {
   }
 });
 
+// app.get("/api/users", async (req, res) => {
+//   // Authentication and authorization logic here
+//   if (!isAdmin(req.user)) {
+//     return res.status(403).send("Access denied");
+//   }
+
+//   const users = await User.find(); // Fetch users from the database
+//   res.json(users);
+// });
+
+app.post("/products", async (req, res) => {
+  const product = new Product(req.body);
+  try {
+    await product.save();
+    res.status(201).send(product);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+app.get("/products", async (req, res) => {
+  try {
+    const product = await Product.find({});
+    // console.log("productId", productId);
+    // if (!product) {
+    //   return res.status(404).send({ message: "Product not found" });
+    // }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).send({ message: "Error retrieving product", error: error });
+  }
+});
+app.get("/products/:productId", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.productId);
+    // console.log("productId", productId);
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).send({ message: "Error retrieving product", error: error });
+  }
+});
+
+app.put("/products/:productId", async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.productId,
+      req.body,
+      { new: true } // returns the updated document
+    );
+    if (!updatedProduct) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).send({ message: "Error updating product" });
+  }
+});
+
+app.delete("/products/:productId", async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.productId);
+    if (!product) {
+      return res.status(404).send({ message: "Product not found" });
+    }
+    res.status(200).send({ message: "Product deleted successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Error deleting product" });
+  }
+});

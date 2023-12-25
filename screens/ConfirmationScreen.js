@@ -63,7 +63,7 @@ const ConfirmationScreen = () => {
       };
 
       const response = await axios.post(
-        "https://96c7-82-222-61-37.ngrok-free.app/orders",
+        "https://9cb5-195-142-243-198.ngrok-free.app/orders",
         orderData
       );
       if (response.status === 200) {
@@ -91,7 +91,7 @@ const ConfirmationScreen = () => {
         >
           {steps?.map((step, index) => (
             <View
-                key={index}
+              key={index}
               style={{ justifyContent: "center", alignItems: "center" }}
             >
               {index > 0 && (

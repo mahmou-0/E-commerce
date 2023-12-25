@@ -31,7 +31,7 @@ const RegisterScreen = () => {
 
     // send a post request  to the backend API
     axios
-      .post("https://96c7-82-222-61-37.ngrok-free.app/register", user)
+      .post("https://9cb5-195-142-243-198.ngrok-free.app/register", user)
       .then((response) => {
         console.log(response);
         Alert.alert(
@@ -61,7 +61,7 @@ const RegisterScreen = () => {
     >
       <View>
         <Image
-          style={{ width: 150, height: 100,  marginTop:18  }}
+          style={{ width: 150, height: 100, marginTop: 18 }}
           // source={{
           //   uri:
           //     "https://assets.stickpng.com/thumbs/6160562276000b00045a7d97.png",

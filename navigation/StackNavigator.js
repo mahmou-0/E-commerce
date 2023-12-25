@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native"; // Correct import for NavigationContainer
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -19,14 +19,28 @@ import ConfirmationScreen from "../screens/ConfirmationScreen";
 import OrderScreen from "../screens/OrderScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import { MaterialIcons } from "@expo/vector-icons";
-import AdminLoginScreen from "../screens/AdminLoginScreen";
+import AdminPanel from "../screens/AdminPanel";
 import AccountDetailsScreen from "../screens/AccountDetailsScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import ProductListScreen from "../component/ProductListScreen ";
+import ProductDetailScreen from "../component/ProductDetailScreen ";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
 
   function BottomTabs() {
+    // const [isAdmin, setIsAdmin] = useState(false);
+
+    // useEffect(() => {
+    //   const checkAdminStatus = async () => {
+    //     const adminStatus = await AsyncStorage.getItem("isAdmin");
+    //     setIsAdmin(JSON.parse(adminStatus));
+    //   };
+
+    //   checkAdminStatus();
+    // }, []);
+
     return (
       <Tab.Navigator>
         <Tab.Screen
@@ -92,6 +106,24 @@ const StackNavigator = () => {
               ),
           }}
         />
+
+        {/* {isAdmin && (
+          <Tab.Screen
+            name="AdminMain"
+            component={AdminLoginScreen}
+            options={{
+              tabBarLabel: "Admin Panel",
+              tabBarLabelStyle: { color: "#008E97" },
+              tabBarIcon: ({ focused }) => (
+                <MaterialIcons
+                  name="admin-panel-settings"
+                  size={24}
+                  color={focused ? "#00CED1" : "black"}
+                />
+              ),
+            }}
+          />
+        )} */}
       </Tab.Navigator>
     );
   }
@@ -147,13 +179,23 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Admin"
-          component={AdminLoginScreen}
+          name="AdminMain"
+          component={AdminPanel}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Account"
           component={AccountDetailsScreen}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProductList"
+          component={ProductListScreen}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProductDetailScreen"
+          component={ProductDetailScreen}
           // options={{ headerShown: false }}
         />
       </Stack.Navigator>
