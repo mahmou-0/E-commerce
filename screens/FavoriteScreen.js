@@ -86,7 +86,7 @@ const FavoriteScreen = () => {
               size={24}
               color="black"
             />
-            <TextInput placeholder="Sreach Amazon.in" />
+            <TextInput placeholder="Sreach Turquoise.in" />
           </Pressable>
 
           <Feather name="mic" size={24} color="black" />

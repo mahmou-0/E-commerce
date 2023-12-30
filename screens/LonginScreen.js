@@ -46,12 +46,12 @@ const LoginScreen = () => {
     axios
       .post("https://9cb5-195-142-243-198.ngrok-free.app/login", user)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const token = response.data.token;
         const isAdmin = response.data.isAdmin;
 
-        console.log("-------------data------", response);
-        console.log("-------------admin", isAdmin);
+        // console.log("-------------data------", response);
+        // console.log("-------------admin", isAdmin);
         //   AsyncStorage.setItem("authToken", token);
         //   if (isAdmin) {
         //     navigation.replace("AdminMain"); // Navigate to the Admin screen
@@ -61,7 +61,7 @@ const LoginScreen = () => {
         // })
         if (typeof isAdmin !== "undefined") {
           // Store token and handle navigation based on isAdmin
-          AsyncStorage.setItem("authToken", token, );
+          AsyncStorage.setItem("authToken", token);
 
           if (isAdmin) {
             navigation.replace("AdminMain");

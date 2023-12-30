@@ -30,12 +30,12 @@ const ProductinfoScreen = () => {
   const handleFavoritePress = (item) => {
     const isFavorite = favorites.some((favItem) => favItem.id === item.id);
     if (isFavorite) {
-      dispatch(removeFavorite(item.id));
+      dispatch(removeFavorite(item));
     } else {
       dispatch(addFavorite(item));
     }
   };
-  console.log("Favorites:....", favorites);
+  // console.log("Favorites:....", favorites);
 
   const addItemToCart = (item) => {
     setAddedToCart(true);
@@ -46,7 +46,7 @@ const ProductinfoScreen = () => {
   };
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart);
+  // console.log(cart);
   return (
     <ScrollView
       style={{ marginTop: 55, flex: 1, backgroundColor: "white" }}

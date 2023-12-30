@@ -9,8 +9,16 @@ import {
   TextInput,
   Image,
   StatusBar,
+  VirtualizedList,
+  FlatList,
 } from "react-native";
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
@@ -28,8 +36,17 @@ import { UserType } from "../UserContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BottomModal, SlideAnimation, ModalContent } from "react-native-modals";
 import { decode as atob } from "base-64";
+// import { ViewPropTypes } from "deprecated-react-native-prop-types";
+import * as Notifications from "expo-notifications";
 
 const HomeScreen = () => {
+  async function registerForNotificationsAsync() {
+    if (Platform.OS === "ios") {
+      await Notifications.requestPermissionsAsync();
+    }
+  }
+  registerForNotificationsAsync();
+
   const list = [
     {
       id: "0",
@@ -204,18 +221,22 @@ const HomeScreen = () => {
 
   const [products, setProducts] = useState([]);
   const navigation = useNavigation();
-  const [open, setOpen] = useState(false);
   const [addresses, setAddresses] = useState([]);
-  const [category, setCategory] = useState("jewelery");
   const { userId, setUserId } = useContext(UserType);
   const [selectedAddress, setSelectedAdress] = useState("");
-  console.log(selectedAddress);
+  // console.log(selectedAddress);
+  const [category, setCategory] = useState("jewelery");
+  const [open, setOpen] = useState(false);
   const [items, setItems] = useState([
     { label: "Men's clothing", value: "men's clothing" },
     { label: "jewelery", value: "jewelery" },
     { label: "electronics", value: "electronics" },
     { label: "women's clothing", value: "women's clothing" },
   ]);
+  const onOpen = useCallback(() => {
+    // Additional logic for when dropdown opens
+    setOpen(true);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -230,11 +251,11 @@ const HomeScreen = () => {
   //   console.log("Products", products);
 
   const onGenderOpen = useCallback(() => {
-    setCompanyOpen(false);
+    setOpen(true);
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart);
+  // console.log(cart);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
@@ -274,6 +295,10 @@ const HomeScreen = () => {
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // const filterProducts = useMemo(() => {
+  //   return products?.filter((item) => item.category === category);
+  // }, [products, category]);
+
   return (
     <>
       <SafeAreaView
@@ -312,7 +337,7 @@ const HomeScreen = () => {
                 color="black"
               />
               <TextInput
-                placeholder="Sreach Amazon.in"
+                placeholder="Sreach Turquoise.in"
                 value={searchQuery}
                 onChangeText={(text) => setSearchQuery(text)}
               />
@@ -496,6 +521,7 @@ const HomeScreen = () => {
               </Pressable>
             ))}
           </ScrollView>
+
           <Text
             style={{
               height: 1,
@@ -504,6 +530,7 @@ const HomeScreen = () => {
               marginTop: 15,
             }}
           />
+
           <View
             style={{
               marginHorizontal: 10,
@@ -521,6 +548,7 @@ const HomeScreen = () => {
               open={open}
               value={category} //genderValue
               items={items}
+              // key={items.id}
               setOpen={setOpen}
               setValue={setCategory}
               setItems={setItems}
@@ -531,6 +559,12 @@ const HomeScreen = () => {
               zIndex={3000}
               zIndexInverse={1000}
             />
+            {/* <FlatList
+              data={filterProducts}
+              renderItem={({ item }) => <ProductItem item={item} />}
+              keyExtractor={(item) => item.id}
+              // Additional FlatList props
+            /> */}
           </View>
 
           <View
@@ -543,7 +577,7 @@ const HomeScreen = () => {
             {products
               ?.filter((item) => item.category === category)
               .map((item, index) => (
-                <ProductItem item={item} key={index} />
+                <ProductItem item={item} key={item.id} />
               ))}
           </View>
         </ScrollView>

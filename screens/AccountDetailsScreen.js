@@ -24,14 +24,20 @@ const AccountDetailsScreen = ({ route }) => {
         backgroundColor: "#00CED1",
       },
       headerLeft: () => (
-        <Image
-          style={{ width: 140, height: 120, resizeMode: "contain" }}
-          //   source={{
-          //     uri:
-          //       "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
-          //   }}
-          source={MyImage}
-        />
+        <View>
+          <Text style={{ paddingTop: 10, fontSize: 20, fontWeight: "bold" }}>
+            {" "}
+            Acoount Information
+          </Text>
+          <Image
+            style={{ width: 140, height: 120, resizeMode: "contain" }}
+            //   source={{
+            //     uri:
+            //       "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
+            //   }}
+            // source={MyImage}
+          />
+        </View>
       ),
       headerRight: () => (
         <View
@@ -46,76 +52,55 @@ const AccountDetailsScreen = ({ route }) => {
     });
   }, []);
   const { user } = route.params;
-  console.log(user);
+  // console.log(user);
 
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
-  const [password, setPassword] = useState(""); // Keep it empty for security
+  const [password, setPassword] = useState(user?.password); // Keep it empty for security
   // const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   // const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  // //   const { userId, setUserId } = useContext(UserType);
+  const { userId, setUserId } = useContext(UserType);
+  // console.log("usserId", userId);
+  // console.log("Password", password);
 
   const handleUpdate = async () => {
     try {
-      // Replace with your API endpoint and update logic
+      // Prepare the body of the request
+      const body = {
+        userId,
+        name,
+        email,
+        oldPassword: password, // Current password for verification
+        newPassword, // New password
+      };
+
+      // Make the API call
       const response = await fetch(
-        `https://9cb5-195-142-243-198.ngrok-free.app/user/update-password${user._id}`,
+        `https://9cb5-195-142-243-198.ngrok-free.app/update-password`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            name,
-            email,
-            password, // Current password for verification
-            newPassword, // New password
-          }),
+          body: JSON.stringify(body),
         }
       );
 
       if (!response.ok) {
-        Alert.alert("Failed to update user details");
+        const errorData = await response.json();
+        Alert.alert("Failed to update user details", errorData.message);
+        return;
       }
 
       const data = await response.json();
+      Alert.alert("Success", "User details updated successfully.");
       console.log("User details updated:", data);
     } catch (error) {
       console.error("Error updating user details:", error);
+      Alert.alert("Error", "An error occurred while updating user details.");
     }
   };
-
-  // const handleUpdate = () => {
-  //   const user = {
-  //     name: name,
-  //     email: email,
-  //     password: password,
-  //     newPassword: newPassword,
-  //   };
-
-  //   // send a post request  to the backend API
-  //   axios
-  //     .post("https://9cb5-195-142-243-198.ngrok-free.app/update-password", user)
-  //     .then((response) => {
-  //       console.log(response);
-  //       Alert.alert(
-  //         "Registration successful",
-  //         "You have been registered Successfully"
-  //       );
-  //       setName("");
-  //       setEmail("");
-  //       setPassword("");
-  //       setNewPassword("");
-  //     })
-  //     .catch((error) => {
-  //       Alert.alert(
-  //         "Registration Error",
-  //         "An error occurred while registering"
-  //       );
-  //       console.log("registration failed....", error);
-  //     });
-  // };
 
   return (
     <View style={styles.container}>

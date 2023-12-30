@@ -78,7 +78,7 @@ const AddressScreen = () => {
       });
   };
 
-  console.log("userId is: ", userId);
+  // console.log("userId is: ", userId);
 
   return (
     <ScrollView style={{ marginTop: 50 }}>

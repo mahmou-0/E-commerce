@@ -20,7 +20,7 @@ const AddAddressScreen = () => {
 
   const [addresses, setAddresses] = useState([]);
   const { userId, setUserId } = useContext(UserType);
-  console.log("userId", userId);
+  // console.log("userId", userId);
   useEffect(() => {
     fetchAddresses();
   }, []);
@@ -42,7 +42,7 @@ const AddAddressScreen = () => {
       fetchAddresses();
     }, [])
   );
-  console.log("addresses", addresses);
+  // console.log("addresses", addresses);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 50 }}>

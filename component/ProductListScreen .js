@@ -45,7 +45,13 @@ const ProductListScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-        
+      <Button
+        title="Add Product"
+        onPress={() =>
+          navigation.navigate("ProductDetailScreen", { productId: null })
+        }
+      />
+
       <FlatList
         data={products}
         keyExtractor={(item) => item._id.toString()}
@@ -67,12 +73,6 @@ const ProductListScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         )}
-      />
-      <Button
-        title="Add Product"
-        onPress={() =>
-          navigation.navigate("ProductDetailScreen", { productId: null })
-        }
       />
     </View>
   );

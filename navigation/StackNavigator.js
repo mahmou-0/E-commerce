@@ -24,6 +24,7 @@ import AccountDetailsScreen from "../screens/AccountDetailsScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProductListScreen from "../component/ProductListScreen ";
 import ProductDetailScreen from "../component/ProductDetailScreen ";
+import YourordersScreen from "../screens/YourordersScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -196,6 +197,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="ProductDetailScreen"
           component={ProductDetailScreen}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Orders"
+          component={YourordersScreen}
           // options={{ headerShown: false }}
         />
       </Stack.Navigator>

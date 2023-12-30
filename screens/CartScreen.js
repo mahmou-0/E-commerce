@@ -20,7 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
-  console.log(".............", cart);
+  // console.log(".............", cart);
 
   const total = cart
     ?.map((item) => item.price * item.quantity)
@@ -65,7 +65,7 @@ const CartScreen = () => {
             size={24}
             color="black"
           />
-          <TextInput placeholder="Sreach Amazon.in" />
+          <TextInput placeholder="Sreach Turquoise.in" />
         </Pressable>
 
         <Feather name="mic" size={24} color="black" />

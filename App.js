@@ -1,5 +1,6 @@
 // import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
+
 import StackNavigator from "./navigation/StackNavigator";
 import { ModalPortal } from "react-native-modals";
 import { UserContext } from "./UserContext";

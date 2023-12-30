@@ -54,7 +54,7 @@ const ProfileScreen = () => {
     });
   }, []);
   const [user, setUser] = useState();
-  console.log('the user in the profile Screen',user);
+  // console.log("the user in the profile Screen", user);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -79,24 +79,24 @@ const ProfileScreen = () => {
     console.log("auth token cleared");
     navigation.replace("Login");
   };
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(
-          `https://9cb5-195-142-243-198.ngrok-free.app/orders/${userId}`
-        );
-        const orders = response.data.orders;
-        setOrders(orders);
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://9cb5-195-142-243-198.ngrok-free.app/orders/${userId}`
+  //       );
+  //       const orders = response.data.orders;
+  //       setOrders(orders);
 
-        setLoading(false);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
 
-    fetchOrders();
-  }, []);
-  console.log("orders", orders);
+  //   fetchOrders();
+  // }, []);
+  // console.log("orders", orders);
 
   return (
     <ScrollView style={{ padding: 10, flex: 1, backgroundColor: "white" }}>
@@ -119,6 +119,7 @@ const ProfileScreen = () => {
             borderRadius: 25,
             flex: 1,
           }}
+          onPress={() => navigation.navigate("Orders")}
         >
           <Text style={{ textAlign: "center" }}>Your orders</Text>
         </Pressable>
@@ -168,40 +169,6 @@ const ProfileScreen = () => {
           <Text style={{ textAlign: "center" }}>Logout</Text>
         </Pressable>
       </View>
-
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : orders.length > 0 ? (
-          orders.map((order) => (
-            <Pressable
-              style={{
-                marginTop: 20,
-                padding: 15,
-                borderRadius: 8,
-                borderWidth: 1,
-                borderColor: "#d0d0d0",
-                marginHorizontal: 10,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              key={order._id}
-            >
-              {/* Render the order information here */}
-              {order.products.slice(0, 1)?.map((product) => (
-                <View style={{ marginVertical: 10 }} key={product._id}>
-                  <Image
-                    source={{ uri: product.image }}
-                    style={{ width: 100, height: 100, resizeMode: "contain" }}
-                  />
-                </View>
-              ))}
-            </Pressable>
-          ))
-        ) : (
-          <Text>No orders found</Text>
-        )}
-      </ScrollView>
     </ScrollView>
   );
 };

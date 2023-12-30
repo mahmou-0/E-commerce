@@ -12,6 +12,7 @@ app.use(cors());
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 const jwt = require("jsonwebtoken");
 app.listen(port, () => {
@@ -328,7 +329,7 @@ app.get("/orders/:userId", async (req, res) => {
 //   }
 // });
 
-app.post("/update-password", async (req, res) => {
+app.put("/update-password", async (req, res) => {
   try {
     const { userId, oldPassword, newPassword } = req.body;
 
