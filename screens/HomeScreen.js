@@ -267,7 +267,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://9cb5-195-142-243-198.ngrok-free.app/addresses/${userId}`
+        `https://a85e-195-142-243-198.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -388,6 +388,7 @@ const HomeScreen = () => {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
+                onPress={() => navigation.navigate("Deals")}
               >
                 <Image
                   style={{ width: 50, height: 50, resizeMode: "contain" }}

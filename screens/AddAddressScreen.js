@@ -27,7 +27,7 @@ const AddAddressScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://9cb5-195-142-243-198.ngrok-free.app/addresses/${userId}`
+        `https://a85e-195-142-243-198.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -72,7 +72,7 @@ const AddAddressScreen = () => {
             size={24}
             color="black"
           />
-          <TextInput placeholder="Sreach Amazon.in" />
+          <TextInput placeholder="Sreach Turquoise.in" />
         </Pressable>
 
         <Feather name="mic" size={24} color="black" />

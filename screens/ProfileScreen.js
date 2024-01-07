@@ -60,7 +60,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `https://9cb5-195-142-243-198.ngrok-free.app/profile/${userId}`
+          `https://a85e-195-142-243-198.ngrok-free.app/profile/${userId}`
         );
         const { user } = response.data;
         setUser(user);

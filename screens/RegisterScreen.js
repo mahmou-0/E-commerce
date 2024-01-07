@@ -31,7 +31,7 @@ const RegisterScreen = () => {
 
     // send a post request  to the backend API
     axios
-      .post("https://9cb5-195-142-243-198.ngrok-free.app/register", user)
+      .post("https://a85e-195-142-243-198.ngrok-free.app/register", user)
       .then((response) => {
         // console.log(response);
         Alert.alert(

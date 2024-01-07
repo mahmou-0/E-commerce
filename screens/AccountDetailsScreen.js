@@ -77,7 +77,7 @@ const AccountDetailsScreen = ({ route }) => {
 
       // Make the API call
       const response = await fetch(
-        `https://9cb5-195-142-243-198.ngrok-free.app/update-password`,
+        `https://a85e-195-142-243-198.ngrok-free.app/update-password`,
         {
           method: "PUT",
           headers: {

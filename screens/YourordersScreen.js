@@ -58,7 +58,7 @@ const YourordersScreen = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `https://9cb5-195-142-243-198.ngrok-free.app/orders/${userId}`
+          `https://a85e-195-142-243-198.ngrok-free.app/orders/${userId}`
         );
         const orders = response.data.orders;
         setOrders(orders);
@@ -123,14 +123,14 @@ const YourordersScreen = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              onPress={() => navigation.navigate("Info")}
+              // onPress={() => navigation.navigate("Info")}
               key={order._id}
             >
-              {/* Render the order information here */}
+              {/* Render the order information here     */}
               {order.products.slice(0, 1)?.map((product) => (
                 <View style={{ marginVertical: 10 }} key={product._id}>
                   <Image
-                    source={{ uri: product.image }}
+                    source={{ uri: product?.image }}
                     style={{ width: 100, height: 100, resizeMode: "contain" }}
                   />
                 </View>

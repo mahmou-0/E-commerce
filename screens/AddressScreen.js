@@ -55,7 +55,7 @@ const AddressScreen = () => {
     };
 
     axios
-      .post("https://9cb5-195-142-243-198.ngrok-free.app/addresses", {
+      .post("https://a85e-195-142-243-198.ngrok-free.app/addresses", {
         userId,
         address,
       })

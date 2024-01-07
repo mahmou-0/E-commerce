@@ -67,7 +67,7 @@ const ConfirmationScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `https://9cb5-195-142-243-198.ngrok-free.app/addresses/${userId}`
+        `https://a85e-195-142-243-198.ngrok-free.app/addresses/${userId}`
       );
       const { addresses } = response.data;
 
@@ -93,7 +93,7 @@ const ConfirmationScreen = () => {
       };
 
       const response = await axios.post(
-        "https://9cb5-195-142-243-198.ngrok-free.app/orders",
+        "https://a85e-195-142-243-198.ngrok-free.app/orders",
         orderData
       );
       if (response.status === 200) {
@@ -114,7 +114,7 @@ const ConfirmationScreen = () => {
     Notifications.scheduleNotificationAsync({
       content: {
         title: "Your order has been palced!",
-        body: "Order palced!",
+        body: "thank you for shopping !",
       },
       trigger: {
         seconds: 2,

@@ -44,7 +44,7 @@ const LoginScreen = () => {
     };
 
     axios
-      .post("https://9cb5-195-142-243-198.ngrok-free.app/login", user)
+      .post("https://a85e-195-142-243-198.ngrok-free.app/login", user)
       .then((response) => {
         // console.log(response);
         const token = response.data.token;

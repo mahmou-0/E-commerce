@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const CartScreen = () => {
   const cart = useSelector((state) => state.cart.cart);
+
   // console.log(".............", cart);
 
   const total = cart
@@ -250,6 +251,7 @@ const CartScreen = () => {
                   borderColor: "#C0C0C0",
                   borderWidth: 0.6,
                 }}
+                onPress={() => navigation.navigate("Favorite")}
               >
                 <Text>Save For Later</Text>
               </Pressable>
@@ -263,6 +265,7 @@ const CartScreen = () => {
                   borderColor: "#C0C0C0",
                   borderWidth: 0.6,
                 }}
+                onPress={() => navigation.navigate("Home")}
               >
                 <Text>See More Like this</Text>
               </Pressable>

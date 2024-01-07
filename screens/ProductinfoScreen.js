@@ -84,7 +84,7 @@ const ProductinfoScreen = () => {
         <Feather name="mic" size={24} color="black" />
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {route.params.carouselImages.map((item, index) => (
+        {route.params?.carouselImages.map((item, index) => (
           <ImageBackground
             style={{
               width,
@@ -214,7 +214,7 @@ const ProductinfoScreen = () => {
 
       <View style={{ padding: 10 }}>
         <Text style={{ fontSize: 15, fontWeight: "bold", marginVertical: 5 }}>
-          Total : {route.params.price}TL
+          Total : {route?.params?.price}TL
         </Text>
         <Text style={{ color: "#00CED1", alignSelf: "flex-end" }}>
           FREE delivery
@@ -283,6 +283,7 @@ const ProductinfoScreen = () => {
           marginHorizontal: 10,
           marginVertical: 10,
         }}
+        onPress={() => navigation.navigate("Cart")}
       >
         <Text>Buy Now</Text>
       </Pressable>
