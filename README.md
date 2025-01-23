@@ -1,5 +1,8 @@
+# Project Title
 E-Commerce App for Electronic Devices  
+## Introduction
 Welcome to the E-Commerce App, a platform for exploring and purchasing various electronic devices. This project showcases a full-stack application built with modern technologies, providing an intuitive and seamless user experience
+
 Features
 Product Catalog: Browse a wide range of electronic devices with detailed descriptions.
 User Authentication: Secure user registration and login with session handling.
