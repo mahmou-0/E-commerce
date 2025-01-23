@@ -12,10 +12,10 @@ Welcome to the E-Commerce App, a platform for exploring and purchasing various e
 - Responsive Design: Fully optimized for mobile and tablet screens.
 # Tech Stack
 - Frontend
-- React Native: For building a seamless and responsive user interface.
+ React Native: For building a seamless and responsive user interface.
 - Backend
-- Node.js: For handling server-side logic and APIs.
+Node.js: For handling server-side logic and APIs.
 - Database
-- MongoDB: A NoSQL database for efficient storage and retrieval of product and user data.
+MongoDB: A NoSQL database for efficient storage and retrieval of product and user data.
 - Package Manager
 npm: For managing project dependencies.
